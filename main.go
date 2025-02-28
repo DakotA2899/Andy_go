@@ -19,7 +19,7 @@ func LinksMask(s string) string {
 	for i := range s1 {
 		if string(s1[i:i+7]) == "http://" {
 			for t := i + 7; t < len(s1); t++ {
-				if string(s1[t]) == " " {
+				if (s1[t]) == ' ' {
 					break
 				} else {
 					s1[t] = '*'
