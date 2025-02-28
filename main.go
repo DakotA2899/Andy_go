@@ -7,14 +7,14 @@ import (
 )
 
 func main() {
-
-	fmt.Println(LinksMask())
-}
-
-func LinksMask() string {
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
-	s1 := []byte(scanner.Text())
+	fmt.Println(LinksMask(scanner.Text()))
+}
+
+func LinksMask(s string) string {
+
+	s1 := []byte(s)
 
 	for i := range s1 {
 		if string(s1[i:i+7]) == "http://" {
@@ -22,7 +22,7 @@ func LinksMask() string {
 				if string(s1[t]) == " " {
 					break
 				} else {
-					s1[t] = byte('*')
+					s1[t] = '*'
 				}
 
 			}
