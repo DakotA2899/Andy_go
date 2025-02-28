@@ -1,31 +1,34 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
 
 func main() {
 
-	fmt.Println(LinksMask("Hello, its my page: http://localhost123.com See you"))
+	fmt.Println(LinksMask())
 }
 
-func LinksMask(s string) string {
-	s1 := []byte(s)
+func LinksMask() string {
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Scan()
+	s1 := []byte(scanner.Text())
 
-	for i, k := range s1 {
-		if string(k) == "h" {
-			s2 := s1[i : i+7]
-			if string(s2) == "http://" {
-				for t := i; t < len(s1); t++ {
-					if string(s1[t]) == " " {
-						break
-					} else {
-						s1[t] = 42
-					}
-
+	for i := range s1 {
+		if string(s1[i:i+7]) == "http://" {
+			for t := i + 7; t < len(s1); t++ {
+				if string(s1[t]) == " " {
+					break
+				} else {
+					s1[t] = byte('*')
 				}
-			}
 
+			}
 		}
 
 	}
+
 	return string(s1)
 }
